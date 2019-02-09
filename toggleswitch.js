@@ -4,7 +4,10 @@ class ToggleSwitch {
         toggled = false,
         height = "60px",
         gap = "4px",
-
+        background_off = "#cccccc",
+        background_on = "#21f358",
+        foreground = "#ffffff",
+        round = true
     }) {
         if (element === undefined) {
             throw new Error("Must provide element to bind to");
@@ -12,7 +15,7 @@ class ToggleSwitch {
             element.innerHTML = `
             <label class = "toggleswitch">
                 <input type = "checkbox" ${toggled ? "checked='checked'": ""}>
-                <span class = "slider round"> </span>
+                <span class = "slider ${round ? "round" : ""}"> </span>
             </label>`;
             let checkbox = element.getElementsByTagName("input")[0];
             checkbox.addEventListener('change', this.toggle.bind(this));
@@ -39,7 +42,7 @@ class ToggleSwitch {
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: #ccc;
+                background-color: ${background_off};
                 -webkit-transition: .4s;
                 transition: .4s;
             }
@@ -50,15 +53,12 @@ class ToggleSwitch {
                 width: var(--toggleswitch-slider-diameter);
                 left: var(--toggleswitch-gap);
                 bottom: var(--toggleswitch-gap);
-                background-color: white;
+                background-color: ${foreground};
                 -webkit-transition: .4s;
                 transition: .4s;
             }
             input:checked+.slider {
-                background-color: #2196F3;
-            }
-            input:focus+.slider {
-                box-shadow: 0 0 1px #2196F3;
+                background-color: ${background_on};
             }
             input:checked+.slider:before {
                 -webkit-transform: translateX(var(--toggleswitch-slider-diameter));
